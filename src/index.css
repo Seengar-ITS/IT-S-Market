@@ -1,0 +1,5 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root { --primary: #6C63FF; }
+body { @apply bg-background text-foreground; }
