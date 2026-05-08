@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
-import { AuthProvider } from './contexts/AuthContext'
+import { ThemeProvider, ITSShell } from '@its-universe/os'
+import { AuthProvider, useAuth } from './contexts/AuthContext'
 import Home from './pages/Home'
 import ProductDetail from './pages/ProductDetail'
 import Cart from './pages/Cart'
@@ -8,9 +9,12 @@ import Seller from './pages/Seller'
 import SellerAdd from './pages/SellerAdd'
 import Returns from './pages/Returns'
 import NotFound from './pages/NotFound'
-export default function App() {
+
+function AppContent() {
+  const { user } = useAuth()
+  const itsUser = user ? { id: user.id, name: user.email, email: user.email } : null
   return (
-    <AuthProvider>
+    <ITSShell serviceName="IT-S Market" user={itsUser}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetail />} />
@@ -21,6 +25,16 @@ export default function App() {
         <Route path="/returns" element={<Returns />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </AuthProvider>
+    </ITSShell>
+  )
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </ThemeProvider>
   )
 }
