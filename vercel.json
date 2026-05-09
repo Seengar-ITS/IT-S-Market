@@ -5,7 +5,8 @@
       "destination": "/index.html"
     }
   ],
-  "buildCommand": "vite build",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "installCommand": "npm install",
   "framework": "vite"
 }
