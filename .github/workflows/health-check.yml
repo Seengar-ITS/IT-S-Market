@@ -1,0 +1,18 @@
+name: Health Check
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 */6 * * *'
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check live URL
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://it-s-market.vercel.app)
+          if [ "$STATUS" -ne 200 ]; then
+            echo "Service DOWN: $STATUS"
+            exit 1
+          fi
+          echo "Service LIVE: $STATUS"
