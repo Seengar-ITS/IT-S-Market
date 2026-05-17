@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Allow: /manifest.json
+Disallow: /api/
+Sitemap: https://it-s-market.vercel.app/sitemap.xml
